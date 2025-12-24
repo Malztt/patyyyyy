@@ -103,7 +103,7 @@ const HorizontalSpinner = ({ items, onSpinComplete, isSpinning }) => {
         // Let's Start at Index: targetIndex + 50.
         // End at Index: targetIndex.
 
-        const startItemIndex = targetIndex + 30; // 30 items "ahead" in the strip
+        const startItemIndex = targetIndex + 50; // 50 items "ahead" -> Faster speed (more distance)
         const startX = centerOffset - ((TOTAL_ITEM_WIDTH * startItemIndex) + (ITEM_WIDTH / 2));
 
         const endX = centerOffset - ((TOTAL_ITEM_WIDTH * targetIndex) + (ITEM_WIDTH / 2));
@@ -118,8 +118,8 @@ const HorizontalSpinner = ({ items, onSpinComplete, isSpinning }) => {
         await controls.start({
             x: endX,
             transition: {
-                duration: 5,
-                ease: [0.15, 0.85, 0.35, 1] // Ease out
+                duration: 3.5, // Faster overall (was 5)
+                ease: [0.1, 0.9, 0.2, 1] // Aggressive ease out (Fast start, long slow tail)
             }
         });
 
