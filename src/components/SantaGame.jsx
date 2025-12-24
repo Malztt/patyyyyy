@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
+import santaIcon from '../assets/santa-token.png';
 import './SantaGame.css';
 
 const SantaGame = ({ items, playedIds, isPlaying, onComplete }) => {
@@ -58,8 +59,8 @@ const SantaGame = ({ items, playedIds, isPlaying, onComplete }) => {
                 const rect = targetEl.getBoundingClientRect();
                 const containerRect = targetEl.parentElement.parentElement.getBoundingClientRect(); // .santa-game-container
 
-                const relativeX = rect.left - containerRect.left + (rect.width / 2) - 30; // Center Santa width
-                const relativeY = rect.top - containerRect.top - 50; // Stand on top
+                const relativeX = rect.left - containerRect.left + (rect.width / 2) - 40; // Center Santa (Width 80px)
+                const relativeY = rect.top - containerRect.top - 60; // Stand on top
 
                 const isLast = i === steps.length - 1;
                 const duration = isLast ? 0.8 : 0.4; // Slow down at end
@@ -81,7 +82,7 @@ const SantaGame = ({ items, playedIds, isPlaying, onComplete }) => {
 
         // 4. Drop into Chimney (Final Animation)
         await santaControls.start({
-            y: "+=60",
+            y: "+=30",
             scale: 0,
             transition: { duration: 0.5 }
         });
@@ -90,20 +91,20 @@ const SantaGame = ({ items, playedIds, isPlaying, onComplete }) => {
         setTimeout(() => {
             onComplete(winner);
             // Reset Santa for next time
-            santaControls.set({ scale: 1, y: 0 }); // Will need to reposition for next start
+            santaControls.set({ scale: 1, y: 0 });
         }, 500);
     };
 
     return (
         <div className="santa-game-container">
             {/* Santa Character */}
-            <motion.div
+            <motion.img
+                src={santaIcon}
                 className="santa-character"
                 animate={santaControls}
                 initial={{ x: 20, y: 10 }} // Start top left
-            >
-                🎅
-            </motion.div>
+                alt="Santa"
+            />
 
             <div className="chimney-track">
                 {items.map((item, index) => {
