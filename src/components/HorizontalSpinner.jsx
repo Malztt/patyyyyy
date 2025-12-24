@@ -3,8 +3,8 @@ import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import "./HorizontalSpinner.css";
 
-const ITEM_WIDTH = 160;
-const ITEM_GAP = 15;
+const ITEM_WIDTH = 250;
+const ITEM_GAP = 0;
 const TOTAL_ITEM_WIDTH = ITEM_WIDTH + ITEM_GAP;
 
 const HorizontalSpinner = ({ items, onSpinComplete, isSpinning }) => {
