@@ -43,11 +43,13 @@ function App() {
     <div className="app-container">
       <div className="background-effects"></div>
 
-      <header className="header">
-        <h1>Karaoke Game</h1>
-      </header>
+      <div className="background-effects"></div>
 
       <main className="game-area">
+        <header className="header">
+          <h1>Karaoke Game</h1>
+        </header>
+
         <HorizontalSpinner
           items={lyrics}
           playedIds={playedIds}

@@ -58,15 +58,12 @@ body {
 }
 
 .header {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -350px);
   width: 100%;
   text-align: center;
   padding: 0;
+  margin-bottom: 2rem;
+  /* Gap between Title and Spinner */
   z-index: 20;
-  pointer-events: none;
 }
 
 .header h1 {
@@ -82,7 +79,6 @@ body {
 .header p {
   font-size: 1.1rem;
   color: #1976D2;
-  /* Ice Blue Text */
   font-weight: 600;
   text-shadow: none;
 }
@@ -100,6 +96,27 @@ body {
   max-width: 1000px;
   padding: 0;
   z-index: 10;
+  /* Responsive Scaling: Zoom out on smaller screens */
+}
+
+@media (max-width: 1200px) {
+  .game-area {
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+}
+
+@media (max-width: 900px) {
+  .game-area {
+    transform: translate(-50%, -50%) scale(0.65);
+  }
+}
+
+@media (max-width: 600px) {
+  .game-area {
+    transform: translate(-50%, -50%) scale(0.45);
+    width: 200%;
+    /* Compensate for scale shrinking width */
+  }
 }
 
 .controls {
