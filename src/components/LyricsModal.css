@@ -1,0 +1,98 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #FF6B6B 0%, #C44569 100%);
+    /* Festive Red/Pink */
+    padding: 2rem;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.music-icon {
+    margin-bottom: 1rem;
+    color: #FFD700;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.modal-header h2 {
+    font-size: 1.8rem;
+    margin: 0;
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.song-info h3 {
+    font-size: 1.4rem;
+    margin: 0;
+    color: #FFD700;
+}
+
+.song-info .artist {
+    margin: 0.5rem 0 1.5rem;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.lyrics-box {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    font-style: italic;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    line-height: 1.5;
+}
+
+.action-btn {
+    background: #FFD700;
+    color: #C44569;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.action-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+}
