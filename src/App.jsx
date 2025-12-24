@@ -1,24 +1,24 @@
 import { useState } from 'react';
 import confetti from 'canvas-confetti';
-import SantaGame from './components/SantaGame';
+import HorizontalSpinner from './components/HorizontalSpinner';
 import LyricsModal from './components/LyricsModal';
 import { lyrics } from './data/lyrics';
 import './App.css';
 
 function App() {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isSpinning, setIsSpinning] = useState(false);
   const [result, setResult] = useState(null);
   const [playedIds, setPlayedIds] = useState([]);
 
-  const handleStartClick = () => {
-    if (!isPlaying) {
+  const handleSpinClick = () => {
+    if (!isSpinning) {
       setResult(null); // Clear previous result
-      setIsPlaying(true);
+      setIsSpinning(true);
     }
   };
 
-  const handleGameComplete = (winningItem) => {
-    setIsPlaying(false);
+  const handleSpinComplete = (winningItem) => {
+    setIsSpinning(false);
     setResult(winningItem);
 
     // Trigger confetti
@@ -45,24 +45,24 @@ function App() {
 
       <header className="header">
         <h1>🎄 Merry Christmas & Happy New Year 🎅</h1>
-        <p>ช่วยซานต้าส่งของขวัญ... ลุ้นรับเพลงฟรี!</p>
+        <p>หมุนวงล้อเสี่ยงทาย... รับของขวัญและร้องเพลงฉลอง!</p>
       </header>
 
       <main className="game-area">
-        <SantaGame
+        <HorizontalSpinner
           items={lyrics}
           playedIds={playedIds}
-          onComplete={handleGameComplete}
-          isPlaying={isPlaying}
+          onSpinComplete={handleSpinComplete}
+          isSpinning={isSpinning}
         />
 
         <div className="controls">
           <button
             className="spin-btn"
-            onClick={handleStartClick}
-            disabled={isPlaying || isGameFinished}
+            onClick={handleSpinClick}
+            disabled={isSpinning || isGameFinished}
           >
-            {isPlaying ? 'ซานต้ากำลังเดิน...' : isGameFinished ? 'แจกครบแล้ว!' : 'เริ่มเดินแจกของ!'}
+            {isSpinning ? 'กำลังหมุน...' : isGameFinished ? 'หมดแล้วจ้า' : 'หมุนเลย!'}
           </button>
         </div>
       </main>
