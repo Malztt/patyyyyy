@@ -17,8 +17,8 @@
     /* Festive Red/Pink */
     padding: 2rem;
     border-radius: 20px;
-    width: 90%;
-    max-width: 600px;
+    width: 95%;
+    max-width: 1000px;
     text-align: center;
     color: white;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
@@ -49,7 +49,7 @@
 }
 
 .modal-header h2 {
-    font-size: 3rem;
+    font-size: 4rem;
     color: #FFD700;
     margin: 0;
     margin-bottom: 1.5rem;
@@ -74,9 +74,10 @@
     color: #333;
     padding: 1.5rem;
     border-radius: 12px;
-    margin-bottom: 1.5rem;
-    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
+    line-height: 1.6;
     font-style: italic;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
     line-height: 1.5;
