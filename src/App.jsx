@@ -71,6 +71,12 @@ function App() {
           <p>© 2025 Christmas & New Year Party Game</p>
         </footer>
       </main>
+
+      {/* Result Modal */}
+      <LyricsModal
+        result={result}
+        onClose={handleModalClose}
+      />
     </div>
   );
 }
