@@ -1,2 +1,1 @@
-ddddกdddd
-ไๆำ
+dddd
