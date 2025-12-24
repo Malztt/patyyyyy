@@ -24,9 +24,7 @@ const LyricsModal = ({ result, onClose }) => {
                     <h2>{result.song}</h2>
                 </div>
 
-                <div className="song-info">
-                    <p className="artist">ศิลปิน: {result.artist}</p>
-                </div>
+
 
                 <div className="lyrics-box">
                     <p>"{result.snippet}"</p>
