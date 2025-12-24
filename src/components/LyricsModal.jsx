@@ -21,11 +21,10 @@ const LyricsModal = ({ result, onClose }) => {
 
                 <div className="modal-header">
                     <Music size={48} className="music-icon" />
-                    <h2>ถึงตาคุณแล้ว!</h2>
+                    <h2>{result.song}</h2>
                 </div>
 
                 <div className="song-info">
-                    <h3>{result.song}</h3>
                     <p className="artist">ศิลปิน: {result.artist}</p>
                 </div>
 
