@@ -58,8 +58,15 @@ body {
 }
 
 .header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -350px);
+  width: 100%;
   text-align: center;
-  padding: 2rem 1rem;
+  padding: 0;
+  z-index: 20;
+  pointer-events: none;
 }
 
 .header h1 {
