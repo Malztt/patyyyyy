@@ -1,7 +1,9 @@
 .wheel-container {
   position: relative;
-  width: 350px;
-  height: 350px;
+  width: 500px;
+  height: 500px;
+  max-width: 90vw;
+  max-height: 90vw;
   display: flex;
   justify-content: center;
   align-items: center;

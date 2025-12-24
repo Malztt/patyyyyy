@@ -27,7 +27,7 @@ function App() {
       particleCount: 150,
       spread: 70,
       origin: { y: 0.6 },
-      colors: ['#FFD700', '#FF4500', '#FFFFFF', '#C44569']
+      colors: ['#C0392B', '#27AE60', '#F1C40F', '#ECF0F1']
     });
   };
 
@@ -36,8 +36,8 @@ function App() {
       <div className="background-effects"></div>
 
       <header className="header">
-        <h1>🎉 New Year Karaoke 🎤</h1>
-        <p>หมุนวงล้อเสี่ยงทาย... ร้องเพลงฉลองปีใหม่!</p>
+        <h1>🎄 Merry Christmas & Happy New Year 🎅</h1>
+        <p>หมุนวงล้อเสี่ยงทาย... รับของขวัญและร้องเพลงฉลอง!</p>
       </header>
 
       <main className="game-area">
@@ -65,7 +65,7 @@ function App() {
       />
 
       <footer className="footer">
-        <p>© 2025 New Year Party Game</p>
+        <p>© 2025 Christmas & New Year Party Game</p>
       </footer>
     </div>
   );

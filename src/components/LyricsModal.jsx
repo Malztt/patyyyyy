@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { X, Music } from "lucide-react";
 import "./LyricsModal.css";
 

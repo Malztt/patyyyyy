@@ -6,14 +6,14 @@ const SpinWheel = ({ items, onSpinComplete, isSpinning }) => {
     const controls = useAnimation();
     const [rotation, setRotation] = useState(0);
 
-    if (items.length === 0) {
-        return <div className="wheel-container"><div className="wheel-empty">🎉 ครบแล้ว! 🎉</div></div>;
-    }
+    // Fix: Don't return early to avoid Hook violation
+    // if (items.length === 0) ...
 
     useEffect(() => {
         if (isSpinning) {
             startSpin();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isSpinning]);
 
     const startSpin = async () => {
@@ -56,35 +56,42 @@ const SpinWheel = ({ items, onSpinComplete, isSpinning }) => {
 
     return (
         <div className="wheel-container">
-            <div className="pointer"></div>
-            <motion.div
-                className="wheel"
-                animate={controls}
-                style={{
-                    background: `conic-gradient(
+            {items.length === 0 ? (
+                <div className="wheel-empty">🎉 ครบแล้ว! 🎉</div>
+            ) : (
+                <>
+                    <div className="pointer"></div>
+                    <motion.div
+                        className="wheel"
+                        animate={controls}
+                        style={{
+                            background: `conic-gradient(
             ${items.map((item, index) => {
-                        const start = (index * 100) / items.length;
-                        const end = ((index + 1) * 100) / items.length;
-                        const color = index % 2 === 0 ? '#FFD700' : '#FF4500'; // Gold & OrangeRed
-                        return `${color} ${start}% ${end}%`;
-                    }).join(', ')}
+                                const start = (index * 100) / items.length;
+                                const end = ((index + 1) * 100) / items.length;
+                                const colors = ['#C0392B', '#27AE60', '#F1C40F', '#ECF0F1']; // Red, Green, Gold, White
+                                const color = colors[index % colors.length];
+                                return `${color} ${start}% ${end}%`;
+                            }).join(', ')}
           )`
-                }}
-            >
-                {items.map((item, index) => {
-                    const rotation = (360 / items.length) * index + (360 / items.length) / 2;
-                    return (
-                        <div
-                            key={item.id}
-                            className="wheel-segment-content"
-                            style={{ transform: `rotate(${rotation}deg) translateY(-140px)` }}
-                        >
-                            <span className="segment-text">{index + 1}</span>
-                        </div>
-                    );
-                })}
-            </motion.div >
-        </div >
+                        }}
+                    >
+                        {items.map((item, index) => {
+                            const rotation = (360 / items.length) * index + (360 / items.length) / 2;
+                            return (
+                                <div
+                                    key={item.id}
+                                    className="wheel-segment-content"
+                                    style={{ transform: `rotate(${rotation}deg) translateY(-140px)` }}
+                                >
+                                    <span className="segment-text">{index + 1}</span>
+                                </div>
+                            );
+                        })}
+                    </motion.div>
+                </>
+            )}
+        </div>
     );
 };
 
