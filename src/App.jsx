@@ -20,15 +20,21 @@ function App() {
   const handleSpinComplete = (winningItem) => {
     setIsSpinning(false);
     setResult(winningItem);
-    setAvailableItems(prev => prev.filter(item => item.id !== winningItem.id));
 
     // Trigger confetti
     confetti({
       particleCount: 150,
       spread: 70,
       origin: { y: 0.6 },
-      colors: ['#C0392B', '#27AE60', '#F1C40F', '#ECF0F1']
+      colors: ['#D32F2F', '#1976D2', '#FFC107', '#FFFFFF']
     });
+  };
+
+  const handleModalClose = () => {
+    if (result) {
+      setAvailableItems(prev => prev.filter(item => item.id !== result.id));
+    }
+    setResult(null);
   };
 
   return (
@@ -61,7 +67,7 @@ function App() {
       {/* Result Modal */}
       <LyricsModal
         result={result}
-        onClose={() => setResult(null)}
+        onClose={handleModalClose}
       />
 
       <footer className="footer">
