@@ -8,6 +8,7 @@ import './App.css';
 function App() {
   const [isSpinning, setIsSpinning] = useState(false);
   const [result, setResult] = useState(null);
+  const [availableItems, setAvailableItems] = useState(lyrics);
 
   const handleSpinClick = () => {
     if (!isSpinning) {
@@ -19,6 +20,7 @@ function App() {
   const handleSpinComplete = (winningItem) => {
     setIsSpinning(false);
     setResult(winningItem);
+    setAvailableItems(prev => prev.filter(item => item.id !== winningItem.id));
 
     // Trigger confetti
     confetti({
@@ -40,7 +42,7 @@ function App() {
 
       <main className="game-area">
         <SpinWheel
-          items={lyrics}
+          items={availableItems}
           onSpinComplete={handleSpinComplete}
           isSpinning={isSpinning}
         />
@@ -49,9 +51,9 @@ function App() {
           <button
             className="spin-btn"
             onClick={handleSpinClick}
-            disabled={isSpinning}
+            disabled={isSpinning || availableItems.length === 0}
           >
-            {isSpinning ? 'กำลังหมุน...' : 'หมุนเลย!'}
+            {isSpinning ? 'กำลังหมุน...' : availableItems.length === 0 ? 'หมดแล้วจ้า' : 'หมุนเลย!'}
           </button>
         </div>
       </main>

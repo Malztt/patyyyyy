@@ -6,6 +6,10 @@ const SpinWheel = ({ items, onSpinComplete, isSpinning }) => {
     const controls = useAnimation();
     const [rotation, setRotation] = useState(0);
 
+    if (items.length === 0) {
+        return <div className="wheel-container"><div className="wheel-empty">🎉 ครบแล้ว! 🎉</div></div>;
+    }
+
     useEffect(() => {
         if (isSpinning) {
             startSpin();
