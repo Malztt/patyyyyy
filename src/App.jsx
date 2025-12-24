@@ -1,24 +1,24 @@
 import { useState } from 'react';
 import confetti from 'canvas-confetti';
-import HorizontalSpinner from './components/HorizontalSpinner';
+import SantaGame from './components/SantaGame';
 import LyricsModal from './components/LyricsModal';
 import { lyrics } from './data/lyrics';
 import './App.css';
 
 function App() {
-  const [isSpinning, setIsSpinning] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [result, setResult] = useState(null);
   const [playedIds, setPlayedIds] = useState([]);
 
-  const handleSpinClick = () => {
-    if (!isSpinning) {
+  const handleStartClick = () => {
+    if (!isPlaying) {
       setResult(null); // Clear previous result
-      setIsSpinning(true);
+      setIsPlaying(true);
     }
   };
 
-  const handleSpinComplete = (winningItem) => {
-    setIsSpinning(false);
+  const handleGameComplete = (winningItem) => {
+    setIsPlaying(false);
     setResult(winningItem);
 
     // Trigger confetti
@@ -45,24 +45,24 @@ function App() {
 
       <header className="header">
         <h1>🎄 Merry Christmas & Happy New Year 🎅</h1>
-        <p>หมุนวงล้อเสี่ยงทาย... รับของขวัญและร้องเพลงฉลอง!</p>
+        <p>ช่วยซานต้าส่งของขวัญ... ลุ้นรับเพลงฟรี!</p>
       </header>
 
       <main className="game-area">
-        <HorizontalSpinner
+        <SantaGame
           items={lyrics}
           playedIds={playedIds}
-          onSpinComplete={handleSpinComplete}
-          isSpinning={isSpinning}
+          onComplete={handleGameComplete}
+          isPlaying={isPlaying}
         />
 
         <div className="controls">
           <button
             className="spin-btn"
-            onClick={handleSpinClick}
-            disabled={isSpinning || isGameFinished}
+            onClick={handleStartClick}
+            disabled={isPlaying || isGameFinished}
           >
-            {isSpinning ? 'กำลังหมุน...' : isGameFinished ? 'หมดแล้วจ้า' : 'หมุนเลย!'}
+            {isPlaying ? 'ซานต้ากำลังเดิน...' : isGameFinished ? 'แจกครบแล้ว!' : 'เริ่มเดินแจกของ!'}
           </button>
         </div>
       </main>

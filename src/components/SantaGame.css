@@ -1,0 +1,96 @@
+.santa-game-container {
+    width: 100%;
+    max-width: 1000px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 3px solid #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.chimney-track {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding-top: 60px;
+    /* Space for Santa walking on top */
+}
+
+.chimney-box {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #8D6E63, #5D4037);
+    border-top: 8px solid #fff;
+    /* Snow on chimney */
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: default;
+    transition: all 0.3s ease;
+}
+
+.chimney-box:nth-child(even) {
+    background: linear-gradient(135deg, #795548, #4E342E);
+}
+
+/* Number or Icon inside chimney */
+.chimney-content {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Played State */
+.chimney-box.is-played {
+    opacity: 0.5;
+    filter: grayscale(100%);
+    background: #ccc;
+    border-top-color: #ddd;
+}
+
+.chimney-box.is-played .chimney-content {
+    content: "❌";
+    font-size: 1.5rem;
+}
+
+/* Santa Character */
+.santa-character {
+    position: absolute;
+    top: 10px;
+    /* Walk above the boxes */
+    left: 0;
+    font-size: 3rem;
+    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.3));
+    z-index: 100;
+    transition: left 0.5s ease-in-out, top 0.3s ease;
+}
+
+.santa-character.walking {
+    animation: santa-bounce 0.4s infinite alternate;
+}
+
+@keyframes santa-bounce {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-10px);
+    }
+}
+
+/* Winner Highlight */
+.chimney-box.winner {
+    background: linear-gradient(135deg, #FFC107, #FF9800);
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #FFC107;
+    z-index: 50;
+    border: 3px solid #FFF;
+}
