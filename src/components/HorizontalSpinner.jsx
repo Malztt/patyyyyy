@@ -23,12 +23,11 @@ const HorizontalSpinner = ({ items, playedIds = [], onSpinComplete, isSpinning }
         // 10000 / 175 ~ 57 items.
         // 14 items * 5 sets = 70 items. Enough.
 
-        // Ensure plenty of runway even if items.length is small (e.g. 1 or 2 items)
-        // We need enough items to cover the animation start index (target + 80)
-        // Safe bet: Ensure at least 300 total items in the strip.
-        const minTotalItems = 300;
+        // Ensure plenty of runway even if items.length is small
+        // Safe bet: Ensure at least 180 total items in the strip. (Reduced from 300 for performance)
+        const minTotalItems = 180;
         const calculatedRepeats = Math.ceil(minTotalItems / items.length);
-        const repeats = Math.max(20, calculatedRepeats);
+        const repeats = Math.max(15, calculatedRepeats);
 
         const newDisplayItems = [];
         for (let i = 0; i < repeats; i++) {
@@ -51,6 +50,9 @@ const HorizontalSpinner = ({ items, playedIds = [], onSpinComplete, isSpinning }
     const spin = async () => {
         if (!containerRef.current) return;
 
+        // Stop any running animation
+        controls.stop();
+
         // Filter out played items to find candidates
         const candidates = items.filter(item => !playedIds.includes(item.id));
 
@@ -70,8 +72,9 @@ const HorizontalSpinner = ({ items, playedIds = [], onSpinComplete, isSpinning }
 
         // Current logic: Find an instance of winner near index 40 (arbitrary "far enough" point)
         // items.length = 14. 3 sets = 42.
-        // Let's aim for the 10th set of items.
-        const targetSet = 10;
+        // Ensure we land on this winner in the "middle" of our long list
+        // Let's aim for the 3rd set of items (Reduced from 10th for performance)
+        const targetSet = 3;
         const targetIndex = (targetSet * items.length) + winnerIndex;
 
         // Calculate exact X position to center this item.
