@@ -68,7 +68,7 @@ function App() {
         </div>
 
         <footer className="footer-copyright">
-          <p>© 2025 Christmas & New Year Party Game</p>
+          <p>© 2025 Recruitment Team</p>
         </footer>
       </main>
 
