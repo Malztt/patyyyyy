@@ -44,8 +44,7 @@ function App() {
       <div className="background-effects"></div>
 
       <header className="header">
-        <h1>🎄 Merry Christmas & Happy New Year 🎅</h1>
-        <p>หมุนวงล้อเสี่ยงทาย... รับของขวัญและร้องเพลงฉลอง!</p>
+        <h1>Karaoke Game</h1>
       </header>
 
       <main className="game-area">
