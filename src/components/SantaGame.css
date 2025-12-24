@@ -1,96 +1,102 @@
 .santa-game-container {
     width: 100%;
     max-width: 1000px;
-    padding: 20px;
+    padding: 30px;
     position: relative;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.4);
+    background: #4CAF50;
+    /* Green Cloth / Grass Board */
+    background-image:
+        radial-gradient(rgba(255, 255, 255, 0.2) 2px, transparent 2px),
+        linear-gradient(45deg, rgba(0, 0, 0, 0.05) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.05) 75%, rgba(0, 0, 0, 0.05));
+    background-size: 30px 30px, 60px 60px;
     backdrop-filter: blur(10px);
     border-radius: 20px;
-    border: 3px solid #fff;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 8px solid #8D6E63;
+    /* Wood Border */
+    box-shadow:
+        inset 0 0 50px rgba(0, 0, 0, 0.5),
+        0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .chimney-track {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
+    gap: 20px;
     padding-top: 60px;
-    /* Space for Santa walking on top */
 }
 
 .chimney-box {
-    width: 100px;
-    height: 100px;
-    background: linear-gradient(135deg, #8D6E63, #5D4037);
-    border-top: 8px solid #fff;
-    /* Snow on chimney */
-    border-radius: 8px;
+    width: 90px;
+    height: 90px;
+    background: #FFF;
+    border-radius: 12px;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 0 #CCC, 0 10px 10px rgba(0, 0, 0, 0.2);
     cursor: default;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    border: 2px solid #ddd;
 }
 
+/* Creating a path look */
 .chimney-box:nth-child(even) {
-    background: linear-gradient(135deg, #795548, #4E342E);
+    background: #FFCDD2;
+    /* Light Red */
+    box-shadow: 0 8px 0 #E57373, 0 10px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Number or Icon inside chimney */
+.chimney-box:nth-child(odd) {
+    background: #C8E6C9;
+    /* Light Green */
+    box-shadow: 0 8px 0 #81C784, 0 10px 10px rgba(0, 0, 0, 0.2);
+}
+
 .chimney-content {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 2rem;
-    font-weight: bold;
+    color: #555;
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 /* Played State */
 .chimney-box.is-played {
-    opacity: 0.5;
-    filter: grayscale(100%);
-    background: #ccc;
-    border-top-color: #ddd;
+    opacity: 0.6;
+    background: #E0E0E0 !important;
+    box-shadow: 0 4px 0 #BDBDBD !important;
+    transform: translateY(4px);
 }
 
 .chimney-box.is-played .chimney-content {
-    content: "❌";
     font-size: 1.5rem;
 }
 
 /* Santa Character */
 .santa-character {
     position: absolute;
-    top: 10px;
-    /* Walk above the boxes */
+    top: 0;
     left: 0;
-    font-size: 3rem;
-    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.3));
+    width: 80px;
+    /* Adjust size based on image */
+    height: auto;
+    filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.4));
     z-index: 100;
-    transition: left 0.5s ease-in-out, top 0.3s ease;
 }
 
+/* Walking bounce */
 .santa-character.walking {
     animation: santa-bounce 0.4s infinite alternate;
 }
 
-@keyframes santa-bounce {
-    from {
-        transform: translateY(0);
-    }
-
-    to {
-        transform: translateY(-10px);
-    }
-}
-
 /* Winner Highlight */
 .chimney-box.winner {
-    background: linear-gradient(135deg, #FFC107, #FF9800);
-    transform: scale(1.1);
-    box-shadow: 0 0 20px #FFC107;
+    background: #FFF9C4 !important;
+    /* Yellow */
+    box-shadow: 0 8px 0 #FDD835, 0 0 20px #FFEB3B !important;
+    transform: scale(1.1) translateY(-5px);
     z-index: 50;
-    border: 3px solid #FFF;
+    border-color: #FBC02D;
 }
