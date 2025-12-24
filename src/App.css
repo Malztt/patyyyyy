@@ -1,14 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;800&display=swap');
 
 :root {
-  --primary: #D42426;
-  /* Santa Red */
-  --secondary: #165B33;
-  /* Christmas Green */
-  --accent: #F8B229;
-  /* Gold */
-  --bg-gradient: linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 50%, #F0F0F0 100%);
-  /* Snow White */
+  --primary: #FF0033;
+  /* Bright Santa Red */
+  --secondary: #00FF33;
+  /* Neon Green */
+  --accent: #FFD700;
+  /* Bright Gold */
+  /* Actually let's use a nice Christmas Night gradient but vibrant */
+  --bg-gradient: radial-gradient(circle at center, #1a472a 0%, #0d2b1d 100%);
+  /* Deep Vibrant Green */
 }
 
 body {
@@ -17,8 +18,8 @@ body {
   font-family: 'Kanit', sans-serif;
   box-sizing: border-box;
   background: var(--bg-gradient);
-  color: #8B0000;
-  /* Dark Red Text */
+  color: white;
+  /* Bright White Text */
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -38,10 +39,10 @@ body {
   top: 0;
   left: 0;
   background-image:
-    radial-gradient(circle at 20% 30%, rgba(212, 36, 38, 0.1) 2px, transparent 3px),
-    radial-gradient(circle at 80% 70%, rgba(22, 91, 51, 0.1) 2px, transparent 3px),
-    radial-gradient(circle at 40% 40%, rgba(248, 178, 41, 0.2) 1px, transparent 2px),
-    radial-gradient(circle at 60% 10%, rgba(212, 36, 38, 0.1) 2px, transparent 3px);
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.4) 2px, transparent 3px),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.4) 2px, transparent 3px),
+    radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.3) 1px, transparent 2px),
+    radial-gradient(circle at 60% 10%, rgba(255, 255, 255, 0.5) 2px, transparent 3px);
   background-size: 50% 50%;
   animation: snow 10s linear infinite;
 }
@@ -64,17 +65,19 @@ body {
 .header h1 {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
-  background: linear-gradient(to right, #C0392B, #27AE60, #F1C40F);
+  background: linear-gradient(to right, #FF0033, #00FF33, #FFD700);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .header p {
   font-size: 1.1rem;
-  color: #165B33;
-  /* Green text */
+  color: #FFD700;
+  /* Gold text */
   font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .game-area {
