@@ -129,11 +129,8 @@ const HorizontalSpinner = ({ items, playedIds = [], onSpinComplete, isSpinning }
 
         const endX = centerOffset - ((TOTAL_ITEM_WIDTH * targetIndex) + (ITEM_WIDTH / 2));
 
-        // Reset to start position immediately
-        await controls.start({
-            x: startX,
-            transition: { duration: 0 }
-        });
+        // Reset to start position immediately using set() for instant application
+        controls.set({ x: startX });
 
         // Animate to end position
         await controls.start({
