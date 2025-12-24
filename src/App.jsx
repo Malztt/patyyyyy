@@ -8,7 +8,7 @@ import './App.css';
 function App() {
   const [isSpinning, setIsSpinning] = useState(false);
   const [result, setResult] = useState(null);
-  const [availableItems, setAvailableItems] = useState(lyrics);
+  const [playedIds, setPlayedIds] = useState([]);
 
   const handleSpinClick = () => {
     if (!isSpinning) {
@@ -32,10 +32,12 @@ function App() {
 
   const handleModalClose = () => {
     if (result) {
-      setAvailableItems(prev => prev.filter(item => item.id !== result.id));
+      setPlayedIds(prev => [...prev, result.id]);
     }
     setResult(null);
   };
+
+  const isGameFinished = playedIds.length === lyrics.length;
 
   return (
     <div className="app-container">
@@ -48,7 +50,8 @@ function App() {
 
       <main className="game-area">
         <HorizontalSpinner
-          items={availableItems}
+          items={lyrics}
+          playedIds={playedIds}
           onSpinComplete={handleSpinComplete}
           isSpinning={isSpinning}
         />
@@ -57,9 +60,9 @@ function App() {
           <button
             className="spin-btn"
             onClick={handleSpinClick}
-            disabled={isSpinning || availableItems.length === 0}
+            disabled={isSpinning || isGameFinished}
           >
-            {isSpinning ? 'กำลังหมุน...' : availableItems.length === 0 ? 'หมดแล้วจ้า' : 'หมุนเลย!'}
+            {isSpinning ? 'กำลังหมุน...' : isGameFinished ? 'หมดแล้วจ้า' : 'หมุนเลย!'}
           </button>
         </div>
       </main>

@@ -61,6 +61,14 @@
     box-shadow: 0 0 10px #F1C40F;
 }
 
+.spinner-item.is-played {
+    opacity: 0.5;
+    filter: grayscale(80%);
+    background: rgba(200, 200, 200, 0.5);
+    color: #666;
+    border-color: #999;
+}
+
 .spinner-marker::before {
     content: "▼";
     position: absolute;

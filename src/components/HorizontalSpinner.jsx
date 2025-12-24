@@ -7,7 +7,7 @@ const ITEM_WIDTH = 250;
 const ITEM_GAP = 0;
 const TOTAL_ITEM_WIDTH = ITEM_WIDTH + ITEM_GAP;
 
-const HorizontalSpinner = ({ items, onSpinComplete, isSpinning }) => {
+const HorizontalSpinner = ({ items, playedIds = [], onSpinComplete, isSpinning }) => {
     const controls = useAnimation();
     const containerRef = useRef(null);
     const [displayItems, setDisplayItems] = useState([]);
@@ -51,9 +51,18 @@ const HorizontalSpinner = ({ items, onSpinComplete, isSpinning }) => {
     const spin = async () => {
         if (!containerRef.current) return;
 
-        // Random winner from the ORIGINAL items list
-        const winnerIndex = Math.floor(Math.random() * items.length);
-        const winner = items[winnerIndex];
+        // Filter out played items to find candidates
+        const candidates = items.filter(item => !playedIds.includes(item.id));
+
+        if (candidates.length === 0) return;
+
+        // Random winner from CANDIDATES
+        const winnerIndexInCandidates = Math.floor(Math.random() * candidates.length);
+        const winner = candidates[winnerIndexInCandidates];
+
+        // Find the index of this winner in the ORIGINAL items list
+        // This is crucial for alignment. The list structure is constant.
+        const winnerIndex = items.findIndex(item => item.id === winner.id);
 
         // Ensure we land on this winner in the "middle" of our long list
         // Let's pick a target index somewhere deep in the list, e.g., 50% - 70% in.
@@ -151,11 +160,17 @@ const HorizontalSpinner = ({ items, onSpinComplete, isSpinning }) => {
                 animate={controls}
                 initial={{ x: 0 }}
             >
-                {displayItems.map((item, index) => (
-                    <div key={`${item.id}-${index}`} className="spinner-item">
-                        {item.song}
-                    </div>
-                ))}
+                {displayItems.map((item, index) => {
+                    const isPlayed = playedIds.includes(item.id);
+                    return (
+                        <div
+                            key={`${item.id}-${index}`}
+                            className={`spinner-item ${isPlayed ? 'is-played' : ''}`}
+                        >
+                            {item.song}
+                        </div>
+                    );
+                })}
             </motion.div>
         </div>
     );
