@@ -23,7 +23,13 @@ const HorizontalSpinner = ({ items, onSpinComplete, isSpinning }) => {
         // 10000 / 175 ~ 57 items.
         // 14 items * 5 sets = 70 items. Enough.
 
-        const repeats = 20; // Ensure plenty of runway
+        // Ensure plenty of runway even if items.length is small (e.g. 1 or 2 items)
+        // We need enough items to cover the animation start index (target + 80)
+        // Safe bet: Ensure at least 300 total items in the strip.
+        const minTotalItems = 300;
+        const calculatedRepeats = Math.ceil(minTotalItems / items.length);
+        const repeats = Math.max(20, calculatedRepeats);
+
         const newDisplayItems = [];
         for (let i = 0; i < repeats; i++) {
             newDisplayItems.push(...items);
@@ -100,10 +106,10 @@ const HorizontalSpinner = ({ items, onSpinComplete, isSpinning }) => {
         // Start: Target Index + Buffer (e.g. +50 items).
         // End: Target Index.
 
-        // Let's Start at Index: targetIndex + 50.
+        // Let's Start at Index: targetIndex + 80.
         // End at Index: targetIndex.
 
-        const startItemIndex = targetIndex + 50; // 50 items "ahead" -> Faster speed (more distance)
+        const startItemIndex = targetIndex + 80; // 80 items "ahead" -> Super Faster speed
         const startX = centerOffset - ((TOTAL_ITEM_WIDTH * startItemIndex) + (ITEM_WIDTH / 2));
 
         const endX = centerOffset - ((TOTAL_ITEM_WIDTH * targetIndex) + (ITEM_WIDTH / 2));
@@ -118,8 +124,8 @@ const HorizontalSpinner = ({ items, onSpinComplete, isSpinning }) => {
         await controls.start({
             x: endX,
             transition: {
-                duration: 3.5, // Faster overall (was 5)
-                ease: [0.1, 0.9, 0.2, 1] // Aggressive ease out (Fast start, long slow tail)
+                duration: 2.5, // Super Fast (was 3.5)
+                ease: [0.22, 1, 0.36, 1] // cubicOut (Fast start, smooth deceleration)
             }
         });
 
