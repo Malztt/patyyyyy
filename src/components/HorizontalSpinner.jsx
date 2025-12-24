@@ -36,7 +36,10 @@ const HorizontalSpinner = ({ items, onSpinComplete, isSpinning }) => {
         }
         setDisplayItems(newDisplayItems);
 
-    }, [items]);
+        // Force reset position instantly to prevent backwards drift
+        controls.set({ x: 0 });
+
+    }, [items, controls]);
 
     useEffect(() => {
         if (isSpinning && items.length > 0) {
