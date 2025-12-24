@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import confetti from 'canvas-confetti';
-import SpinWheel from './components/SpinWheel';
+import HorizontalSpinner from './components/HorizontalSpinner';
 import LyricsModal from './components/LyricsModal';
 import { lyrics } from './data/lyrics';
 import './App.css';
@@ -41,7 +41,7 @@ function App() {
       </header>
 
       <main className="game-area">
-        <SpinWheel
+        <HorizontalSpinner
           items={availableItems}
           onSpinComplete={handleSpinComplete}
           isSpinning={isSpinning}

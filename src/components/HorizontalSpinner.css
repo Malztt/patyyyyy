@@ -1,0 +1,85 @@
+.spinner-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    height: 180px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    border: 4px solid #F1C40F;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.spinner-track {
+    display: flex;
+    gap: 15px;
+    padding: 0 50vw;
+    /* Start with padding to center items if needed */
+}
+
+.spinner-item {
+    min-width: 160px;
+    height: 120px;
+    background: linear-gradient(135deg, #C0392B, #922B21);
+    border: 2px solid #F1C40F;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    user-select: none;
+    padding: 10px;
+}
+
+.spinner-item:nth-child(even) {
+    background: linear-gradient(135deg, #27AE60, #1E8449);
+}
+
+.spinner-marker {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background: #F1C40F;
+    z-index: 10;
+    box-shadow: 0 0 10px #F1C40F;
+}
+
+.spinner-marker::before {
+    content: "▼";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #F1C40F;
+    font-size: 2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.spinner-marker::after {
+    content: "▲";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #F1C40F;
+    font-size: 2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.spinner-empty {
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+}
