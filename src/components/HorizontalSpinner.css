@@ -23,6 +23,7 @@
 }
 
 .spinner-item {
+    box-sizing: border-box;
     width: 250px;
     min-width: 250px;
     height: 150px;
