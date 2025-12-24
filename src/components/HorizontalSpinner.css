@@ -4,15 +4,11 @@
     max-width: 1000px;
     height: 280px;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 20px;
-    border: 2px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    background: transparent;
+    border: none;
+    box-shadow: none;
     display: flex;
     align-items: center;
-    margin: 2rem 0;
 }
 
 .spinner-track-v2 {
