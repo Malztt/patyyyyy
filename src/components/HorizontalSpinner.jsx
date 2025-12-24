@@ -149,17 +149,17 @@ const HorizontalSpinner = ({ items, playedIds = [], onSpinComplete, isSpinning }
 
     if (items.length === 0) {
         return (
-            <div className="spinner-container">
+            <div className="spinner-container-v2">
                 <div className="spinner-empty">🎉 ครบแล้ว! 🎉</div>
             </div>
         );
     }
 
     return (
-        <div className="spinner-container" ref={containerRef}>
+        <div className="spinner-container-v2" ref={containerRef}>
             <div className="spinner-marker"></div>
             <motion.div
-                className="spinner-track"
+                className="spinner-track-v2"
                 animate={controls}
                 initial={{ x: 0 }}
             >

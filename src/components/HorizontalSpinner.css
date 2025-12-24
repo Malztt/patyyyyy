@@ -1,4 +1,4 @@
-.spinner-container {
+.spinner-container-v2 {
     position: relative;
     width: 100%;
     max-width: 1000px;
@@ -15,10 +15,11 @@
     margin: 2rem 0;
 }
 
-.spinner-track {
+.spinner-track-v2 {
     display: flex;
     gap: 0;
-    /* padding removed to fix alignment logic */
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 .spinner-item {
