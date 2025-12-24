@@ -47,7 +47,7 @@ function App() {
 
       <main className="game-area">
         <header className="header">
-          <p>© 2025 Christmas & New Year Party Game</p>
+          <h1>Karaoke Game</h1>
         </header>
 
         <HorizontalSpinner
@@ -67,8 +67,8 @@ function App() {
           </button>
         </div>
 
-        <footer className="footer-title">
-          <h1>Karaoke Game</h1>
+        <footer className="footer-copyright">
+          <p>© 2025 Christmas & New Year Party Game</p>
         </footer>
       </main>
     </div>
