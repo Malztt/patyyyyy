@@ -12,7 +12,9 @@ const SurvivorGame = ({ onBack }) => {
 
     const [isRolling, setIsRolling] = useState(false);
 
-    const drawCard = () => {
+    const [showOverlay, setShowOverlay] = useState(false);
+
+    const handleCardClick = () => {
         if (isRolling) return;
 
         let deck = phase === 1 ? remainingPhase1 : remainingPhase2;
@@ -22,6 +24,7 @@ const SurvivorGame = ({ onBack }) => {
             return;
         }
 
+        setShowOverlay(true);
         setIsRolling(true);
 
         // Wait for animation then finalize
@@ -50,12 +53,17 @@ const SurvivorGame = ({ onBack }) => {
         // Effects based on card type
         if (card.type === 'survive' || card.type === 'revive' || card.type === 'action') {
             confetti({
-                particleCount: 100,
-                spread: 70,
+                particleCount: 150,
+                spread: 100,
                 origin: { y: 0.6 },
                 colors: ['#4CAF50', '#FFEB3B', '#FFFFFF']
             });
         }
+    };
+
+    const handleCloseOverlay = () => {
+        setShowOverlay(false);
+        setCurrentCard(null);
     };
 
     const getCardColor = (type) => {
@@ -66,53 +74,6 @@ const SurvivorGame = ({ onBack }) => {
             case 'action': return 'var(--info-color)';
             default: return 'var(--card-bg)';
         }
-    };
-
-    const renderCardContent = () => {
-        if (isRolling) {
-            return (
-                <div
-                    className="card-display shake"
-                    style={{
-                        borderColor: '#fff',
-                        boxShadow: '0 0 20px rgba(255,255,255,0.2)'
-                    }}
-                >
-                    <div className="card-content">
-                        <p className="card-text" style={{ fontSize: '20rem', marginTop: '-60px', lineHeight: '1', margin: 0 }}>?</p>
-                    </div>
-                </div>
-            );
-        }
-
-        if (currentCard) {
-            return (
-                <div
-                    className="card-display"
-                    style={{
-                        borderColor: getCardColor(currentCard.type),
-                        boxShadow: `0 0 20px ${getCardColor(currentCard.type)}40`
-                    }}
-                >
-                    <div className="card-content">
-                        <p className="card-text">{currentCard.text}</p>
-                        <span className={`card-type ${currentCard.type}`}>
-                            {currentCard.type === 'eliminate' ? 'ตกรอบ' :
-                                currentCard.type === 'survive' ? 'รอดตาย' :
-                                    currentCard.type === 'revive' ? 'ชุบชีวิต' :
-                                        currentCard.type === 'action' ? 'คำสั่ง' :
-                                            currentCard.type.toUpperCase()}
-                        </span>
-                    </div>
-                </div>
-            );
-        }
-
-        return (
-            <div className="card-placeholder">
-                <p>สุ่ม... เพื่อโชคชะตา</p>
-            </div>
-        );
     };
 
     return (
@@ -127,23 +88,66 @@ const SurvivorGame = ({ onBack }) => {
                     className={`phase-btn ${phase === 1 ? 'active' : ''}`}
                     onClick={() => setPhase(1)}
                 >
-                    Phase 1: Global
+                    Phase 1: Global ({remainingPhase1.length})
                 </button>
                 <button
                     className={`phase-btn ${phase === 2 ? 'active' : ''}`}
                     onClick={() => setPhase(2)}
                 >
-                    Phase 2: Individual
+                    Phase 2: Individual ({remainingPhase2.length})
                 </button>
             </div>
 
-            <div className="game-board">
-                {renderCardContent()}
-
-                <button className="draw-btn" onClick={drawCard} disabled={isRolling}>
-                    {isRolling ? 'กำลังสุ่ม...' : `จั่วการ์ด (${phase === 1 ? remainingPhase1.length : remainingPhase2.length})`}
-                </button>
+            <div className="card-grid">
+                {(phase === 1 ? remainingPhase1 : remainingPhase2).slice(0, 12).map((_, index) => (
+                    <button key={index} className="mini-card" onClick={handleCardClick} disabled={isRolling}>
+                    </button>
+                ))}
             </div>
+
+            {showOverlay && (
+                <div className="reveal-overlay">
+                    {isRolling ? (
+                        <div
+                            className="card-display shake"
+                            style={{
+                                borderColor: '#fff',
+                                boxShadow: '0 0 20px rgba(255,255,255,0.2)'
+                            }}
+                        >
+                            <div className="card-content">
+                                <p className="card-text" style={{ fontSize: '20rem', marginTop: '-60px', lineHeight: '1', margin: 0 }}>?</p>
+                            </div>
+                        </div>
+                    ) : (
+                        currentCard && (
+                            <>
+                                <div
+                                    className="card-display"
+                                    style={{
+                                        borderColor: getCardColor(currentCard.type),
+                                        boxShadow: `0 0 50px ${getCardColor(currentCard.type)}80`
+                                    }}
+                                >
+                                    <div className="card-content">
+                                        <p className="card-text">{currentCard.text}</p>
+                                        <span className={`card-type ${currentCard.type}`}>
+                                            {currentCard.type === 'eliminate' ? 'ตกรอบ' :
+                                                currentCard.type === 'survive' ? 'รอดตาย' :
+                                                    currentCard.type === 'revive' ? 'ชุบชีวิต' :
+                                                        currentCard.type === 'action' ? 'คำสั่ง' :
+                                                            currentCard.type.toUpperCase()}
+                                        </span>
+                                    </div>
+                                </div>
+                                <button className="reveal-close-btn" onClick={handleCloseOverlay}>
+                                    ปิดการ์ด
+                                </button>
+                            </>
+                        )
+                    )}
+                </div>
+            )}
         </div>
     );
 };

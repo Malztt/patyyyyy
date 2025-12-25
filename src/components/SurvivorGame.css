@@ -208,5 +208,52 @@
     --success-color: #4CAF50;
     --warning-color: #FFC107;
     --info-color: #2196F3;
-    --card-bg: #333;
-}
+
+    .mini-card:active {
+        transform: scale(0.95);
+    }
+
+    /* Reveal Overlay */
+    .reveal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 2000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.3s ease;
+    }
+
+    .reveal-close-btn {
+        margin-top: 30px;
+        padding: 15px 40px;
+        font-size: 1.5rem;
+        background: white;
+        color: black;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: bold;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        transition: all 0.2s;
+    }
+
+    .reveal-close-btn:hover {
+        transform: scale(1.1);
+        background: #FFC107;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
