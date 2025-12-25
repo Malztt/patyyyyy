@@ -100,7 +100,7 @@ const SurvivorGame = ({ onBack }) => {
 
             <div className="card-grid">
                 {(phase === 1 ? remainingPhase1 : remainingPhase2).slice(0, 12).map((_, index) => (
-                    <button key={index} className="mini-card" onClick={handleCardClick} disabled={isRolling}>
+                    <button key={index} className={`mini-card ${phase === 2 ? 'phase-2' : ''}`} onClick={handleCardClick} disabled={isRolling}>
                     </button>
                 ))}
             </div>

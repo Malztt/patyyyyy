@@ -253,6 +253,10 @@
     transform: scale(0.95);
 }
 
+.mini-card.phase-2 {
+    background: linear-gradient(135deg, #ef5350, #c62828);
+}
+
 /* Reveal Overlay */
 .reveal-overlay {
     position: fixed;
