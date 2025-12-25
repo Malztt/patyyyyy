@@ -48,11 +48,11 @@
 
 .card-count {
     position: fixed;
-    left: 145px;
-    bottom: 160px;
-    top: auto;
-    right: auto;
-    transform: none;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: auto;
+    bottom: auto;
     font-size: 1.5rem;
     font-weight: bold;
     color: #FFC107;
