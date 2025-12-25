@@ -1,0 +1,208 @@
+.survivor-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.survivor-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.survivor-header h2 {
+    font-size: 3rem;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 255, 255, 0.4);
+    font-weight: 800;
+}
+
+.back-btn {
+    background: #1976D2;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s;
+    font-size: 1rem;
+}
+
+.back-btn:hover {
+    background: #1565C0;
+    transform: translateX(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.phase-selector {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.phase-btn {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #888;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.phase-btn.active {
+    background: linear-gradient(45deg, #ff3366, #ff6b6b);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(255, 51, 102, 0.3);
+}
+
+.game-board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    min-height: 400px;
+}
+
+.card-display {
+    background: rgba(20, 20, 20, 0.9);
+    border: 2px solid;
+    border-radius: 20px;
+    padding: 50px;
+    width: 100%;
+    max-width: 600px;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
+}
+
+.card-placeholder {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px dashed rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 600px;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-size: 3rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.card-content h3 {
+    color: #888;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.card-text {
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 1.4;
+    margin-bottom: 30px;
+}
+
+.card-type {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.card-type.eliminate {
+    color: #ff4444;
+    font-size: 4rem;
+    display: block;
+    margin-top: 15px;
+}
+
+.card-type.survive {
+    color: #4CAF50;
+}
+
+.card-type.revive {
+    color: #FFC107;
+}
+
+.card-type.action {
+    color: #2196F3;
+}
+
+.card-display.shake {
+    animation: shake 0.5s infinite;
+}
+
+.draw-btn {
+    background: white;
+    color: black;
+    border: none;
+    padding: 16px 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+}
+
+.draw-btn:disabled {
+    background: #ccc;
+    color: #666;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.draw-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+.draw-btn:active {
+    transform: scale(0.95);
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Base custom properties */
+:root {
+    --danger-color: #ff4444;
+    --success-color: #4CAF50;
+    --warning-color: #FFC107;
+    --info-color: #2196F3;
+    --card-bg: #333;
+}
