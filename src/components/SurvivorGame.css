@@ -17,9 +17,13 @@
 }
 
 .survivor-header h2 {
-    font-size: 3rem;
+    font-size: 4rem;
     margin: 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 255, 255, 0.4);
+    background: linear-gradient(to right, #D32F2F, #1976D2, #FFC107);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px 10px rgba(176, 190, 197, 0.5);
     font-weight: 800;
 }
 

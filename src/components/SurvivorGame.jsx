@@ -119,7 +119,7 @@ const SurvivorGame = ({ onBack }) => {
         <div className="survivor-container">
             <div className="survivor-header">
                 <button className="back-btn" onClick={onBack}>← Menu</button>
-                <h2>Survivor New Year 2025</h2>
+                <h2>Survivor Game</h2>
             </div>
 
             <div className="phase-selector">
