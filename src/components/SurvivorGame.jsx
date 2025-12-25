@@ -83,18 +83,22 @@ const SurvivorGame = ({ onBack }) => {
                 <h2>Survivor Game</h2>
             </div>
 
+            <div className="card-count">
+                เหลือ {phase === 1 ? remainingPhase1.length : remainingPhase2.length} ใบ
+            </div>
+
             <div className="phase-selector">
                 <button
                     className={`phase-btn ${phase === 1 ? 'active' : ''}`}
                     onClick={() => setPhase(1)}
                 >
-                    Phase 1: Global ({remainingPhase1.length})
+                    Phase 1: Global
                 </button>
                 <button
                     className={`phase-btn ${phase === 2 ? 'active' : ''}`}
                     onClick={() => setPhase(2)}
                 >
-                    Phase 2: Individual ({remainingPhase2.length})
+                    Phase 2: Individual
                 </button>
             </div>
 

@@ -46,6 +46,23 @@
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
+.card-count {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #FFC107;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px 30px;
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
 .phase-selector {
     display: flex;
     gap: 10px;
