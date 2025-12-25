@@ -178,6 +178,15 @@
 
 .card-display.shake {
     animation: shake 0.5s infinite;
+    border-color: #fff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.shake-text {
+    font-size: 20rem;
+    margin-top: -60px;
+    line-height: 1;
+    margin: 0;
 }
 
 .draw-btn {
@@ -409,5 +418,15 @@
         bottom: 20px;
         top: auto;
         transform: none;
+    }
+
+    .shake-text {
+        font-size: 10rem;
+        margin-top: -20px;
+    }
+
+    .card-display {
+        width: 90%;
+        margin: 0 auto;
     }
 }

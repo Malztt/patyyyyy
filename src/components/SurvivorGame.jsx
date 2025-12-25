@@ -112,16 +112,8 @@ const SurvivorGame = ({ onBack }) => {
             {showOverlay && (
                 <div className="reveal-overlay">
                     {isRolling ? (
-                        <div
-                            className="card-display shake"
-                            style={{
-                                borderColor: '#fff',
-                                boxShadow: '0 0 20px rgba(255,255,255,0.2)'
-                            }}
-                        >
-                            <div className="card-content">
-                                <p className="card-text" style={{ fontSize: '20rem', marginTop: '-60px', lineHeight: '1', margin: 0 }}>?</p>
-                            </div>
+                        <div className="card-display shake">
+                            <p className="card-text shake-text">?</p>
                         </div>
                     ) : (
                         currentCard && (
@@ -151,8 +143,9 @@ const SurvivorGame = ({ onBack }) => {
                         )
                     )}
                 </div>
-            )}
-        </div>
+            )
+            }
+        </div >
     );
 };
 
