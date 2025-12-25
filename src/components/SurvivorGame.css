@@ -321,3 +321,93 @@
         opacity: 1;
     }
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .survivor-header h2 {
+        font-size: 2.5rem;
+    }
+
+    .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .card-display,
+    .card-placeholder {
+        min-height: 300px;
+        padding: 30px;
+    }
+
+    .card-text {
+        font-size: 2rem;
+    }
+
+    .card-type.eliminate {
+        font-size: 3rem;
+    }
+
+    .card-placeholder {
+        font-size: 2rem;
+    }
+
+    .card-count {
+        font-size: 1.2rem;
+        padding: 10px 20px;
+        right: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .survivor-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .survivor-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .card-display,
+    .card-placeholder {
+        min-height: 250px;
+        padding: 20px;
+    }
+
+    .card-text {
+        font-size: 1.2rem;
+    }
+
+    .card-type.eliminate {
+        font-size: 2rem;
+    }
+
+    .mini-card::before {
+        font-size: 2rem;
+    }
+
+    .reveal-close-btn {
+        padding: 10px 30px;
+        font-size: 1.2rem;
+    }
+
+    .draw-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+
+    .card-count {
+        font-size: 1rem;
+        padding: 8px 15px;
+        right: 15px;
+        bottom: 20px;
+        top: auto;
+        transform: none;
+    }
+}
