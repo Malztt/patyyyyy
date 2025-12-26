@@ -1,26 +1,77 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
-import { phase1Rules, phase2Rules } from '../data/survivorRules';
+import { phase1Pool, phase2Pool } from '../data/survivorCommands';
 import './SurvivorGame.css';
+
+// Phase 1 Deck Configuration
+const PHASE1_DECK_SIZE = 20;
+const RATIOS = {
+    safe: 0.1,  // 10%
+    death: 0.2, // 20%
+    risk: 0.7   // 70%
+};
 
 const SurvivorGame = ({ onBack }) => {
     const [phase, setPhase] = useState(1);
     const [currentCard, setCurrentCard] = useState(null);
-    const [remainingPhase1, setRemainingPhase1] = useState([...phase1Rules]);
-    const [remainingPhase2, setRemainingPhase2] = useState([...phase2Rules]);
+    const [phase1Deck, setPhase1Deck] = useState([]);
+    const [phase2Deck, setPhase2Deck] = useState([]);
+
+    // History can track just text or type for now
     const [history, setHistory] = useState([]);
-
     const [isRolling, setIsRolling] = useState(false);
-
     const [showOverlay, setShowOverlay] = useState(false);
+
+    // Initialize Decks
+    useEffect(() => {
+        setPhase1Deck(generatePhase1Deck());
+        // Phase 2 is just the pool shuffled (or as is, let's shuffle it for randomness)
+        setPhase2Deck([...phase2Pool].sort(() => Math.random() - 0.5));
+    }, []);
+
+    const generatePhase1Deck = () => {
+        const safeCount = Math.round(PHASE1_DECK_SIZE * RATIOS.safe);
+        const deathCount = Math.round(PHASE1_DECK_SIZE * RATIOS.death);
+        // Ensure total is exactly DECK_SIZE (remaining goes to risk)
+        const riskCount = PHASE1_DECK_SIZE - safeCount - deathCount;
+
+        let deck = [];
+
+        // Helper to pick random items
+        const pickRandom = (pool, count) => {
+            const result = [];
+            for (let i = 0; i < count; i++) {
+                const randomItem = pool[Math.floor(Math.random() * pool.length)];
+                // Create a unique copy so if we pick the same item twice it's distinct
+                result.push({ ...randomItem, id: Math.random().toString(36).substr(2, 9) });
+            }
+            return result;
+        };
+
+        deck = [
+            ...pickRandom(phase1Pool.safe, safeCount),
+            ...pickRandom(phase1Pool.death, deathCount),
+            ...pickRandom(phase1Pool.risk, riskCount)
+        ];
+
+        // Shuffle the complete deck
+        return deck.sort(() => Math.random() - 0.5);
+    };
 
     const handleCardClick = () => {
         if (isRolling) return;
 
-        let deck = phase === 1 ? remainingPhase1 : remainingPhase2;
+        let currentDeck = phase === 1 ? phase1Deck : phase2Deck;
 
-        if (deck.length === 0) {
-            alert("หมดกองแล้วจ้า!");
+        if (currentDeck.length === 0) {
+            // If deck empty in Phase 1, maybe regenerate? Or just say empty.
+            // User implies "I will add more later", so for now empty is empty.
+            if (phase === 1) {
+                // Optional: Auto-refill? Let's stick to "Empty" for now unless requested.
+                alert("หมดกองแล้ว! เริ่มเกมใหม่หรือเปลี่ยน Phase");
+            } else {
+                alert("หมดกองแล้วจ้า!");
+            }
             return;
         }
 
@@ -29,21 +80,18 @@ const SurvivorGame = ({ onBack }) => {
 
         // Wait for animation then finalize
         setTimeout(() => {
-            finalizeDraw(deck);
+            finalizeDraw(currentDeck);
         }, 2000);
     };
 
     const finalizeDraw = (deck) => {
-        const randomIndex = Math.floor(Math.random() * deck.length);
-        const card = deck[randomIndex];
-
-        // Remove card from deck
-        const newDeck = deck.filter((_, index) => index !== randomIndex);
+        // Pop the first card (since it's already shuffled)
+        const [card, ...remaining] = deck;
 
         if (phase === 1) {
-            setRemainingPhase1(newDeck);
+            setPhase1Deck(remaining);
         } else {
-            setRemainingPhase2(newDeck);
+            setPhase2Deck(remaining);
         }
 
         setCurrentCard(card);
@@ -53,7 +101,7 @@ const SurvivorGame = ({ onBack }) => {
         // Effects based on card type
         if (card.type === 'survive' || card.type === 'revive' || card.type === 'action') {
             confetti({
-                particleCount: 150,
+                particleCount: 70,
                 spread: 100,
                 origin: { y: 0.6 },
                 colors: ['#4CAF50', '#FFEB3B', '#FFFFFF']
@@ -70,6 +118,7 @@ const SurvivorGame = ({ onBack }) => {
         switch (type) {
             case 'eliminate': return 'var(--danger-color)';
             case 'survive': return 'var(--success-color)';
+            case 'risk': return 'var(--warning-color)';
             case 'revive': return 'var(--warning-color)';
             case 'action': return 'var(--info-color)';
             default: return 'var(--card-bg)';
@@ -84,7 +133,7 @@ const SurvivorGame = ({ onBack }) => {
             </div>
 
             <div className="card-count">
-                เหลือ {phase === 1 ? remainingPhase1.length : remainingPhase2.length} ใบ
+                เหลือ {phase === 1 ? phase1Deck.length : phase2Deck.length} ใบ
             </div>
 
             <div className="phase-selector">
@@ -92,18 +141,18 @@ const SurvivorGame = ({ onBack }) => {
                     className={`phase-btn ${phase === 1 ? 'active' : ''}`}
                     onClick={() => setPhase(1)}
                 >
-                    Phase 1: Global
+                    Phase 1
                 </button>
                 <button
                     className={`phase-btn ${phase === 2 ? 'active' : ''}`}
                     onClick={() => setPhase(2)}
                 >
-                    Phase 2: Individual
+                    Phase 2
                 </button>
             </div>
 
             <div className="card-grid">
-                {(phase === 1 ? remainingPhase1 : remainingPhase2).slice(0, 12).map((_, index) => (
+                {(phase === 1 ? phase1Deck : phase2Deck).slice(0, 12).map((_, index) => (
                     <button key={index} className={`mini-card ${phase === 2 ? 'phase-2' : ''}`} onClick={handleCardClick} disabled={isRolling}>
                     </button>
                 ))}
@@ -129,10 +178,9 @@ const SurvivorGame = ({ onBack }) => {
                                         <p className="card-text">{currentCard.text}</p>
                                         <span className={`card-type ${currentCard.type}`}>
                                             {currentCard.type === 'eliminate' ? 'ตกรอบ' :
-                                                currentCard.type === 'survive' ? 'รอดตาย' :
-                                                    currentCard.type === 'revive' ? 'ชุบชีวิต' :
-                                                        currentCard.type === 'action' ? 'คำสั่ง' :
-                                                            currentCard.type.toUpperCase()}
+                                                currentCard.type === 'survive' ? 'รอด' :
+                                                    currentCard.type === 'risk' ? 'วัดดวง' :
+                                                        currentCard.type.toUpperCase()}
                                         </span>
                                     </div>
                                 </div>

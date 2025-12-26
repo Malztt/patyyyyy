@@ -164,8 +164,18 @@
     margin-top: 15px;
 }
 
+.card-type.risk {
+    color: #FFC107;
+    font-size: 4rem;
+    display: block;
+    margin-top: 15px;
+}
+
 .card-type.survive {
     color: #4CAF50;
+    font-size: 4rem;
+    display: block;
+    margin-top: 15px;
 }
 
 .card-type.revive {
@@ -179,7 +189,11 @@
 .card-display.shake {
     animation: shake 0.5s infinite;
     border-color: #fff;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    /* Performance optimizations */
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    will-change: transform;
 }
 
 .shake-text {
@@ -252,8 +266,13 @@
 
 .mini-card {
     aspect-ratio: 2/3;
-    background: linear-gradient(135deg, #64B5F6, #1976D2);
-    border: 2px solid rgba(0, 0, 0, 0.5);
+    background-color: #1976D2;
+    /* Fallback color */
+    background-image: url('../assets/santa-card-back.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -266,7 +285,8 @@
 }
 
 .mini-card::before {
-    content: '?';
+    content: '';
+    /* Removed '?' */
     font-size: 2.5rem;
     color: rgba(255, 255, 255, 0.8);
     font-weight: 800;
@@ -283,7 +303,14 @@
 }
 
 .mini-card.phase-2 {
-    background: linear-gradient(135deg, #ef5350, #c62828);
+    background-color: #d32f2f;
+    background-image: url('../assets/santa-card-back.png');
+    background-blend-mode: normal;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid #ff1744;
+    box-shadow: inset 0 0 0 2px rgba(255, 23, 68, 0.6), 0 4px 6px rgba(255, 23, 68, 0.4);
 }
 
 /* Reveal Overlay */
